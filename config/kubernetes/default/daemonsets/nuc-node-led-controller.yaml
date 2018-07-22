@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nuc-node-led-controller
+spec:
+  selector:
+    matchLabels:
+      app: nuc-node-led-controller
+  template:
+    metadata:
+      labels:
+        app: nuc-node-led-controller
+    spec:
+      serviceAccountName: nuc-node-led-controller
+      containers:
+        - name: nuc-node-led-controller
+          image: jnewland/nuc-node-led-controller
+          envFrom:
+          - configMapRef:
+              name: nuc-node-led-controller
+          env:
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          securityContext:
+            privileged: true
