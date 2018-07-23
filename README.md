@@ -13,6 +13,8 @@ A few models of Intel NUCs have a dope [software-controllable LED](https://githu
 
 ## Installation
 
+The Kubernetes manifests in [`config/kubernetes/default`](./config/kubernetes/default) will create a ClusterRole that allows this controller to get/list/watch Nodes and a DaemonSet that runs a copy of [`main.go`](./main.go) on each node.
+
 * Install https://github.com/milesp20/intel_nuc_led on each of your NUCs
 * Install [Skaffold](https://github.com/GoogleContainerTools/skaffold)
 
