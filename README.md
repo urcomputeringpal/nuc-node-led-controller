@@ -16,6 +16,8 @@ A few models Intel NUCs have a dope [software-controllable LED](https://github.c
 * Install https://github.com/milesp20/intel_nuc_led on each of your NUCs
 * Install [Skaffold](https://github.com/GoogleContainerTools/skaffold)
 
-    go get github.com/urcomputeringpal/nuc-node-led-controller
-    cd $GOPATH/github.com/urcomputeringpal/nuc-node-led-controller
-    skaffold deploy
+```
+go get github.com/urcomputeringpal/nuc-node-led-controller
+cd $GOPATH/github.com/urcomputeringpal/nuc-node-led-controller
+skaffold deploy
+```
