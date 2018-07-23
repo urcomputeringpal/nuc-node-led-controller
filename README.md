@@ -2,6 +2,8 @@
 
 A few models of Intel NUCs have a dope [software-controllable LED](https://github.com/milesp20/intel_nuc_led) on their front panel. This is a Kubernetes controller that makes that LED reflect the status of the Kubernetes node running on that NUC.
 
+![image](https://user-images.githubusercontent.com/47/43054490-724eea12-8df7-11e8-955c-d074b4817f93.png)
+
 ## Default LED Settings
 
 |Node Status   |LED Ring       |
