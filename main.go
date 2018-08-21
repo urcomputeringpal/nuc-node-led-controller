@@ -29,8 +29,22 @@ import (
 	nodeutil "k8s.io/kubernetes/pkg/api/v1/node"
 )
 
-func setLed(key string) error {
+// LED contains the state of the NUC's LED
+type LED struct {
+	state string
+}
+
+// SetState updates the value of the LED.
+func (led *LED) SetState(key string) error {
 	value := os.Getenv(fmt.Sprintf("NUC_LED_%s", strings.ToUpper(key)))
+	if led.state != value {
+		return led.writeState(value)
+	}
+	return nil
+}
+
+func (led *LED) writeState(value string) error {
+	led.state = value
 	bytes := []byte(value)
 	log.Printf("Setting NUC LED to: %s", value)
 	return ioutil.WriteFile("/proc/acpi/nuc_led", bytes, 0644)
@@ -49,19 +63,21 @@ func main() {
 
 	fmt.Printf("greetings\n")
 
+	led := &LED{}
+
 	for {
 		node, err := clientset.CoreV1().Nodes().Get(os.Getenv("NODE_NAME"), metav1.GetOptions{})
 		if err != nil {
-			setLed("error")
+			led.SetState("error")
 		} else {
 			if nodeutil.IsNodeReady(node) {
 				if node.Spec.Unschedulable == true {
-					setLed("unschedulable")
+					led.SetState("unschedulable")
 				} else {
-					setLed("ready")
+					led.SetState("ready")
 				}
 			} else {
-				setLed("not_ready")
+				led.SetState("not_ready")
 			}
 		}
 		time.Sleep(10 * time.Second)
