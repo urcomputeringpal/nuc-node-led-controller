@@ -18,6 +18,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"strings"
 	"time"
@@ -31,6 +32,7 @@ import (
 func setLed(key string) error {
 	value := os.Getenv(fmt.Sprintf("NUC_LED_%s", strings.ToUpper(key)))
 	bytes := []byte(value)
+	log.Printf("Setting NUC LED to: %s", value)
 	return ioutil.WriteFile("/proc/acpi/nuc_led", bytes, 0644)
 }
 
