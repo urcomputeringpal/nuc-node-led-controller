@@ -14,7 +14,7 @@ spec:
       serviceAccountName: nuc-node-led-controller
       containers:
         - name: nuc-node-led-controller
-          image: jnewland/nuc-node-led-controller
+          image: gcr.io/urcomputeringpal-public/nuc-node-led-controller
           envFrom:
           - configMapRef:
               name: nuc-node-led-controller

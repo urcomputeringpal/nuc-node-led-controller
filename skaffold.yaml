@@ -2,7 +2,7 @@ apiVersion: skaffold/v1alpha2
 kind: Config
 build:
   artifacts:
-  - imageName: jnewland/nuc-node-led-controller
+  - imageName: gcr.io/urcomputeringpal-public/nuc-node-led-controller
 deploy:
   kubectl:
     manifests:
